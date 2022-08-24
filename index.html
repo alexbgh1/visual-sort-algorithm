@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- LOGO & FONT -->
+    <!-- <link rel="icon" type="image/png" href="img/pass.png">-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Visual Sort</title>
+</head>
+<body>
+    <section class="up-select">
+        <h1 class="title">Select Algorithm Sort Method</h1>
+        <select id="sort-type">
+            <option value="Bubble sort">Bubble sort</option>
+            <option value="Insertion sort">Insertion sort</option>
+            <option value="Merge sort">Merge sort</option>
+            <option value="Quick sort">Quick sort</option>
+            <option value="Selection Sort">Selection Sort</option>
+        </select>
+        <button onclick="run()">Run</button>
+        <button onclick="randomizeBars()">Randomize</button>
+    </section>
+    <div class="popup hidden">
+        <div class="popup-blur">
+            <div class="popup-content">
+                <p class="popup-content-text">Sorry you can't <span>do this</span>, the Algorithm is running !</p>
+                <div class="popup-progress-bar"></div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div id="dinamic-bars">
+            <!-- Bars inserted using JS -->
+        </div>
+    </div>
+    <div class="line"></div>
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+/* General Colors */
+:root{
+    --main: #5343c9;
+    --main-b5:#5343c9b5;
+    --main-80: #5343c980;
+    --sub: #ada3e5;
+    --shadow: #e8e7f0;
+    --shadow2: #f5f5f5;
+    --bar:#5150cbeb;
+    --bg: #f6f4ff;
+}
+/* General */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html{
+    background: var(--bg);
+    width: 100%;
+    height: 100%;
+    font-family: 'Poppins', sans-serif !important;
+}
+
+select{
+    font-size: 1rem;
+    border: none;
+    color:var(--main-b5);
+    outline: none;
+    margin: 0 5px;
+    border-radius: 2px;
+}
+option{
+    font-size: 1rem;
+}
+
+button{
+    background-color: white;
+    outline: none;
+    border: 1px dashed var(--shadow);
+    margin: 0 5px;
+    padding: 1px 4px;
+    border-radius: 2px;
+    color: var(--main);
+    cursor: pointer;
+}
+button:hover{
+    background-color: var(--main);
+    color: white;
+}
+
+/* Custom Classes */
+.title{
+    color: var(--bg);
+    margin-right: 15px;
+}
+
+.up-select{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(-90deg,var(--main),var(--sub));
+    box-shadow: 0px 0px 10px var(--main);
+    padding:15px 0;
+    width: 100%;
+    height: 75px;
+}
+
+.container{
+    border-radius: 5px 5px 0 0;
+    width: inherit;
+    display: flex;
+    justify-content: center;
+    margin: 3rem 2rem 0;
+    min-height: 305px;
+    border: 2px double var(--shadow);
+    border-bottom: 1px double var(--main-b5);
+}
+
+#dinamic-bars{
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+    background-color: var(--shadow2);
+}
+
+#dinamic-bars .bar{
+    width: 100%;
+    /* height: random added on script.js -> randomizeBars() */
+}
+
+.bar{
+    background-color: var(--bar);
+    margin: 0 2px;
+    transition-property: background-color, height;
+    transition: 0.15s ease-out;
+}
+
+.line{
+    width: inherit;
+    height: 12px;
+    margin: 0 2rem;
+    /* gradient horizontal -> left to right */
+    background: linear-gradient(180deg, var(--shadow) 40%,var(--bg) 100%); 
+}
+
+
+/* Popup content -> Used when something is running */
+.popup{
+    margin-top: 20px;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    border-radius: 3px;
+    text-align: center;
+    background-color: var(--main-80);
+    backdrop-filter: blur(3.5px);
+    width: 400px;
+    height: 150px;
+}
+.popup-blur{
+    height: inherit;
+}
+.popup-content{
+    padding: 10px 0 0 0;
+    color: white;
+    font-weight: 600;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.popup-progress-bar{
+    background-color: #9e71ff;
+    border-radius: 4px;
+    width: 1%;
+    height: 15px;
+}
+
+.popup-content-text{
+    margin: 0 10px;
+}
+.popup-content-text span{
+    color: var(--main);
+}
+
+.hidden{
+    display: none;
+}
+
+/* Responsive Tablet */
+@media (min-width: 450px) and (max-width: 950px){
+    h1{ font-size: 1rem;}
+    select, option{ font-size: 0.9rem;}
+    .popup-content{font-size: 0.85rem;}
+}
+
+/* Responsive Mobile */
+@media (max-width: 450px){
+    h1{font-size: 0.85rem;}
+    select, option{ font-size: 0.8rem;}
+    .popup{width: 300px;height: 50px;}
+    .popup-content{font-size: 0.75rem;}
+
+    .container{margin: 2rem 1rem 0;}
+}
