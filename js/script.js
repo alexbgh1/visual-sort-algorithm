@@ -1,9 +1,9 @@
 // Global variables
 var solving = false;
 var showingBar = false;
-var bar_num = 10;// This can be a dinamic number: ex using an input
+var bar_num = 20;// This can be a dinamic number: ex using an input
 var arrayToSort = [];
-var delay = 100;
+var delay = 1000;
 
 // Sleep function for delay on loops
 function sleep(ms) {
@@ -119,11 +119,15 @@ async function bubbleSort(){
         for(let j = 0; j < ( arrayToSort.length - i -1 ); j++){
             
             // First Value selected to compare -> green
+            tempBar.style.height = arrayToSort[j]+"px";
+            nextValue.style.height = arrayToSort[j+1]+"px";
+
             barras[j].style.backgroundColor = green;
             await sleep(delay/2);
             // Second value selected to compare -> red
             barras[j+1].style.backgroundColor = red;
             await sleep(delay/2);
+
 
             // SWAP
             if(arrayToSort[j] > arrayToSort[j+1]){
@@ -135,12 +139,13 @@ async function bubbleSort(){
 
                 // Swapping height
                 let temp = arrayToSort[j];
-
                 arrayToSort[j] = arrayToSort[j + 1];
                 barras[j].style.height = arrayToSort[j]+"px";
-
                 arrayToSort[j+1] = temp;
                 barras[j+1].style.height = arrayToSort[j+1]+"px";
+
+                tempBar.style.height = arrayToSort[j]+"px";
+                nextValue.style.height = arrayToSort[j+1]+"px";
             };
             await sleep(delay);
             
