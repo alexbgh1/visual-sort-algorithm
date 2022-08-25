@@ -1,7 +1,7 @@
 // Global variables
 var solving = false;
 var showingBar = false;
-var bar_num = 30;// This can be a dinamic number: ex using an input
+var bar_num = 10;// This can be a dinamic number: ex using an input
 var arrayToSort = [];
 var delay = 100;
 
@@ -14,6 +14,8 @@ function sleep(ms) {
 // 
 const container = document.querySelector('.container');
 const dBars = document.getElementById('dinamic-bars');
+const tempBar = document.querySelector('.temp');
+const nextValue = document.querySelector('.next-value');
 
 const popup = document.querySelector('.popup');
 const popupProgress = document.querySelector('.popup-progress-bar');
@@ -161,20 +163,25 @@ async function insertionSort(){
     var green = "#65cb50eb"; // INDEX SELECCIONADO;
     var red = "#cb5f50eb"; // INDEX SELECCIONADO;
     var yellow = "#cbc550eb"; // COMPARE
+    var cyan = "#50cbb2eb"; // temp value
 
     for (let i = 1; i < arrayToSort.length; i++) {
         let j = i - 1;
         let temp = arrayToSort[i];
+        await sleep(delay/6);
+        tempBar.style.height = temp+'px';
 
         // Verde es el valor que se está ordenando
         barras[i].style.backgroundColor = red;
         await sleep(delay/6);
         barras[i].style.backgroundColor = green;
+
         await sleep(delay);
 
         while (j >= 0 && arrayToSort[j] > temp) {
             // Amarillo son los elementos que se recorren y comparan comparando
             barras[j].style.backgroundColor = yellow;
+            nextValue.style.height = arrayToSort[j]+'px';
 
             arrayToSort[j + 1] = arrayToSort[j];
             barras[j+1].style.height = arrayToSort[j]+"px";
@@ -199,13 +206,12 @@ async function insertionSort(){
 
     // Pinta de verde al final
     colorPaint(green);
-
     async function colorPaint(color){
         for (let i= 0; i < arrayToSort.length; i++){
             barras[i].style.backgroundColor = color;
             await sleep(delay/6);
         }
     };
-
     setTimeout(()=>{solving = false;}, delay*20);
 }
+

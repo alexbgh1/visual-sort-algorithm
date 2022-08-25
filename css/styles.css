@@ -8,6 +8,11 @@
     --shadow2: #f5f5f5;
     --bar:#5150cbeb;
     --bg: #f6f4ff;
+
+    --green: #65cb50eb;
+    --red:#cb5f50eb;
+    --yellow: #cbc550eb;
+    --cyan: #50cbb2eb;
 }
 /* General */
 * {
@@ -68,12 +73,16 @@ button:hover{
     height: 75px;
 }
 
+.margin-center{
+    margin: 3rem 2rem 0;
+}
+
+/* Containers & Bar classes*/
 .container{
     border-radius: 5px 5px 0 0;
     width: inherit;
     display: flex;
     justify-content: center;
-    margin: 3rem 2rem 0;
     min-height: 305px;
     border: 2px double var(--shadow);
     border-bottom: 1px double var(--main-b5);
@@ -101,11 +110,82 @@ button:hover{
 .line{
     width: inherit;
     height: 12px;
-    margin: 0 2rem;
+    margin-bottom:0.1rem;
     /* gradient horizontal -> left to right */
     background: linear-gradient(180deg, var(--shadow) 40%,var(--bg) 100%); 
 }
 
+.info-colors{
+    width: 50%;
+    max-width: 360px;
+    min-width: 280px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    margin: 15px 0;
+}
+.info-color1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+.info-color2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+.mini-box{
+    display: block;
+    margin: 0;
+    width: 15px;
+    height: 15px;
+    background-color: var(--red);
+}
+
+.container-params{
+    display: flex;
+    justify-content: space-between;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    margin: 1rem 0 0;
+    min-height: 305px;
+}
+.container-temp{
+    height: inherit;
+    width: 50%;
+    margin: 0px 10px;
+    border: 2px dashed var(--main-80);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+.b{
+    position: relative;
+    top:2px;
+    background-color: var(--red);
+    height: 100px;
+    width: 70%;
+    transition-property: background-color, height;
+    transition: 0.15s ease-out;
+}
+.temp{
+    background-color: var(--red);
+}
+.next-value{
+    background-color: var(--yellow);
+}
+.general{
+    padding: 0 0 20px 0;
+}
 
 /* Popup content -> Used when something is running */
 .popup{
@@ -120,7 +200,7 @@ button:hover{
     background-color: var(--main-80);
     backdrop-filter: blur(3.5px);
     width: 400px;
-    height: 150px;
+    height: 90px;
 }
 .popup-blur{
     height: inherit;
@@ -156,6 +236,7 @@ button:hover{
 @media (min-width: 450px) and (max-width: 950px){
     h1{ font-size: 1rem;}
     select, option{ font-size: 0.9rem;}
+    .popup{width: 300px; height: 65px;}
     .popup-content{font-size: 0.85rem;}
 }
 
@@ -163,6 +244,7 @@ button:hover{
 @media (max-width: 450px){
     h1{font-size: 0.85rem;}
     select, option{ font-size: 0.8rem;}
+    p{font-size: 0.65rem;}
     .popup{width: 300px;height: 50px;}
     .popup-content{font-size: 0.75rem;}
 
