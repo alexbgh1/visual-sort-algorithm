@@ -5,6 +5,7 @@
     --main-80: #5343c980;
     --sub: #ada3e5;
     --shadow: #e8e7f0;
+    --shadow1: #cbcad3;
     --shadow2: #f5f5f5;
     --bar:#5150cbeb;
     --bg: #f6f4ff;
@@ -55,10 +56,45 @@ button:hover{
     color: white;
 }
 
+input[type="number"]{
+    outline: none;
+    color: var(--main);
+    text-align: center;
+}
+input[type="range"]{
+    -webkit-appearance: none;
+    height: 8px;
+    border-radius: 5px;
+    background-color: var(--sub);
+}
+
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    background-color: var(--main);
+  }
+
+
+label{
+    color: var(--main);
+}
+
+/* hidde number arrows */
+input[type='number']::-webkit-inner-spin-button, 
+input[type='number']::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    margin: 0;
+}
 /* Custom Classes */
 .title{
     color: var(--bg);
     margin-right: 15px;
+}
+.title2{
+    color: var(--bar);
+    text-decoration: underline;
 }
 
 .up-select{
@@ -114,28 +150,64 @@ button:hover{
     /* gradient horizontal -> left to right */
     background: linear-gradient(180deg, var(--shadow) 40%,var(--bg) 100%); 
 }
+.general{
+    margin: 8px 0;
+    padding: 0 0 20px 0;
+    display: flex;
+    flex-direction: column;
+    flex-direction: row;
+}
 
+.parameters{
+    border: 1px solid var(--shadow1);
+    border-radius: 0 0 5px 0 ;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--shadow);
+}
+.info-params{
+    display: grid;
+    min-height: 70%;
+}
+.repo{
+    display: flex;
+    justify-content: center;
+    min-height: 30%;
+}
+.param-nbar{
+    display: flex;
+    flex-direction: column;
+}
+.param-nheight-ndelay{
+    display: flex;
+    margin: 18px 0 18px 0;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
 .info-colors{
-    width: 50%;
-    max-width: 360px;
+    padding: 10px 10px 0px 10px;
+    background-color: var(--shadow2);
+    border: 1px solid var(--shadow);
+    border-radius: 0 0 0 5px;
+    width: 100%;
     min-width: 280px;
     display: grid;
     grid-template-columns: 1fr 1fr 2fr;
-    margin: 15px 0;
 }
-.info-color1{
+.info-color{
+    color: var(--main);
     display: flex;
+    text-align: center;
     flex-direction: column;
     align-items: center;
+}
+.info-color-grid1{
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 2;
 }
-.info-color2{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.info-color-grid2{
     grid-column-start: 3;
     grid-column-end: 4;
     grid-row-start: 1;
@@ -149,7 +221,7 @@ button:hover{
     background-color: var(--red);
 }
 
-.container-params{
+.container-var{
     display: flex;
     justify-content: space-between;
     grid-column-start: 1;
@@ -182,9 +254,6 @@ button:hover{
 }
 .next-value{
     background-color: var(--yellow);
-}
-.general{
-    padding: 0 0 20px 0;
 }
 
 /* Popup content -> Used when something is running */
@@ -238,6 +307,21 @@ button:hover{
     select, option{ font-size: 0.9rem;}
     .popup{width: 300px; height: 65px;}
     .popup-content{font-size: 0.85rem;}
+    .general{flex-direction: column;}
+}
+
+@media (min-width: 600px) and (max-width: 950px){
+    .general{ flex-direction: row;}
+    .param-nheight-ndelay{justify-content: center;}
+    .nd{    display: flex;
+        flex-direction: column;}
+}
+
+@media (min-width: 450px) and (max-width: 600px){
+    .parameters{padding: 20px 10px 10px 10px;}
+    .info-colors{border-radius: 0 0 0 0;border-bottom: none;}
+    .parameters{border-radius: 0 0 5px 5px;}
+
 }
 
 /* Responsive Mobile */
@@ -245,8 +329,10 @@ button:hover{
     h1{font-size: 0.85rem;}
     select, option{ font-size: 0.8rem;}
     p{font-size: 0.65rem;}
+    label{font-size: 0.7rem;}
     .popup{width: 300px;height: 50px;}
     .popup-content{font-size: 0.75rem;}
-
-    .container{margin: 2rem 1rem 0;}
+    .general{align-items: center;flex-direction: column}
+    .info-colors{border-radius: 0 0 0 0;border-bottom: none;}
+    .parameters{padding: 20px 10px 10px 10px;}
 }

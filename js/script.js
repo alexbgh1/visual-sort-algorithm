@@ -1,26 +1,50 @@
-// Global variables
-var solving = false;
-var showingBar = false;
-var bar_num = 20;// This can be a dinamic number: ex using an input
-var arrayToSort = [];
-var delay = 1000;
-
 // Sleep function for delay on loops
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-
-// 
+// Global DOM
 const container = document.querySelector('.container');
 const dBars = document.getElementById('dinamic-bars');
 const tempBar = document.querySelector('.temp');
 const nextValue = document.querySelector('.next-value');
 
+const nbar = document.getElementById('n_bar');
+const ndelay = document.getElementById('n_delay');
+const nheight = document.getElementById('n_height');
+
 const popup = document.querySelector('.popup');
 const popupProgress = document.querySelector('.popup-progress-bar');
 const popupText = document.querySelector('.popup-content-text');
 
+// Global variables
+var solving = false;
+var showingBar = false;
+var arrayToSort = [];
+var bar_num = 20;
+var height = 300;
+var delay = 500;
+
+/* 'parameters' section on HTML-CSS */
+function changeNBar(e){
+    bar_num = e.target.value;
+    nbar.parentElement.firstElementChild.firstElementChild.textContent = e.target.value;
+    randomizeBars();
+}
+
+function changeNHeight(e){
+    //validation: 1 <= height <= 300
+    if (e.target.value < 1)e.target.value = 1;
+    if (e.target.value >300)e.target.value = 300;
+    height = e.target.value;
+    randomizeBars();
+}
+function changeNDelay(e){
+    //validation: 1 <= delay <= 2000
+    if (e.target.value < 1) e.target.value = 1;
+    if (e.target.value >2000) e.target.value = 2000;
+    delay = e.target.value;
+}
 
 /* Waiting for DOM Loaded */
 document.addEventListener("DOMContentLoaded",()=>{randomizeBars();});
@@ -60,7 +84,7 @@ function randomizeBars(){
         arrayToSort = [];
         // CSS .container: min-height: 300px; -> Random height: 0 to 300
         for (let idx=0; idx < bar_num ; idx++){
-            let rheight = Math.floor(Math.random() * 301);
+            let rheight = Math.floor(Math.random() * height+1);
             let bar = document.createElement('div');
             bar.classList.add('bar');
             bar.style.height= '0px';
@@ -91,12 +115,6 @@ function run(){
             case 'Insertion sort':
                 insertionSort();
                 break;
-            case 'Merge sort':
-                break;
-            case 'Quick sort':
-                break;
-            case 'Selection Sort':
-                break;
         }
     }
     else{
@@ -111,9 +129,9 @@ function run(){
 async function bubbleSort(){
     const barras = document.getElementsByClassName('bar');
 
-    var green = "#65cb50eb"; // INDEX SELECCIONADO;
-    var red = "#cb5f50eb"; // INDEX DE COMPARACIÓN;
-    var yellow = "#cbc550eb"; // SWAP
+    // "var(--green)" = "#65cb50eb"; // INDEX SELECCIONADO;
+    // "var(--red)"= "#cb5f50eb"; // INDEX DE COMPARACIÓN;
+    // "var(--yellow)" = "#cbc550eb"; // SWAP
 
     for(let i = 0; i < arrayToSort.length; i++){
         for(let j = 0; j < ( arrayToSort.length - i -1 ); j++){
@@ -122,20 +140,20 @@ async function bubbleSort(){
             tempBar.style.height = arrayToSort[j]+"px";
             nextValue.style.height = arrayToSort[j+1]+"px";
 
-            barras[j].style.backgroundColor = green;
-            await sleep(delay/2);
+            barras[j].style.backgroundColor = "var(--green)";
+            await sleep(delay/4);
             // Second value selected to compare -> red
-            barras[j+1].style.backgroundColor = red;
-            await sleep(delay/2);
+            barras[j+1].style.backgroundColor = "var(--red)";
+            await sleep(delay/3);
 
 
             // SWAP
             if(arrayToSort[j] > arrayToSort[j+1]){
                 
                 // Swap values -> yellow
-                barras[j].style.backgroundColor = yellow;
-                barras[j+1].style.backgroundColor = yellow;
-                await sleep(delay*2);
+                barras[j].style.backgroundColor = "var(--yellow)";
+                barras[j+1].style.backgroundColor = "var(--yellow)";
+                await sleep(delay*1.25);
 
                 // Swapping height
                 let temp = arrayToSort[j];
@@ -147,17 +165,17 @@ async function bubbleSort(){
                 tempBar.style.height = arrayToSort[j]+"px";
                 nextValue.style.height = arrayToSort[j+1]+"px";
             };
-            await sleep(delay);
+            await sleep(delay*0.85);
             
             // The bigger value will end on green
-            barras[j+1].style.backgroundColor = green;
+            barras[j+1].style.backgroundColor = "var(--green)";
             // 
             barras[j].style.backgroundColor = null;
 
             await sleep(delay/5);
         }
     }
-    barras[0].style.backgroundColor = green;
+    barras[0].style.backgroundColor = "var(--green)";
     setTimeout(()=>{solving = false;}, delay*20)
 }
 
@@ -165,10 +183,9 @@ async function bubbleSort(){
 async function insertionSort(){
     const barras = document.getElementsByClassName('bar');
 
-    var green = "#65cb50eb"; // INDEX SELECCIONADO;
-    var red = "#cb5f50eb"; // INDEX SELECCIONADO;
-    var yellow = "#cbc550eb"; // COMPARE
-    var cyan = "#50cbb2eb"; // temp value
+    // "var(--green)" = "#65cb50eb"; // INDEX SELECCIONADO;
+    // "var(--red)"= "#cb5f50eb"; // INDEX SELECCIONADO;
+    // "var(--yellow)" = // COMPARE
 
     for (let i = 1; i < arrayToSort.length; i++) {
         let j = i - 1;
@@ -177,15 +194,15 @@ async function insertionSort(){
         tempBar.style.height = temp+'px';
 
         // Verde es el valor que se está ordenando
-        barras[i].style.backgroundColor = red;
+        barras[i].style.backgroundColor = "var(--red)";
         await sleep(delay/6);
-        barras[i].style.backgroundColor = green;
+        barras[i].style.backgroundColor = "var(--green)";
 
         await sleep(delay);
 
         while (j >= 0 && arrayToSort[j] > temp) {
             // Amarillo son los elementos que se recorren y comparan comparando
-            barras[j].style.backgroundColor = yellow;
+            barras[j].style.backgroundColor = "var(--yellow)";
             nextValue.style.height = arrayToSort[j]+'px';
 
             arrayToSort[j + 1] = arrayToSort[j];
@@ -194,15 +211,16 @@ async function insertionSort(){
             barras[j].style.backgroundColor = null;
             j--;
         }
+        nextValue.style.height = arrayToSort[j]+'px';
 
 
         // Rojo es el indice de i
-        barras[j+1].style.backgroundColor = red;
+        barras[j+1].style.backgroundColor = "var(--red)";
         arrayToSort[j+1] = temp;
         
         await sleep(delay/6);
         // Verde es el elemento en que se detiene
-        barras[j+1].style.backgroundColor = green;
+        barras[j+1].style.backgroundColor = "var(--green)";
         barras[j+1].style.height = arrayToSort[j+1]+"px";
         
         await sleep(delay/6);
@@ -210,7 +228,7 @@ async function insertionSort(){
 
 
     // Pinta de verde al final
-    colorPaint(green);
+    colorPaint("var(--green)");
     async function colorPaint(color){
         for (let i= 0; i < arrayToSort.length; i++){
             barras[i].style.backgroundColor = color;
@@ -219,4 +237,3 @@ async function insertionSort(){
     };
     setTimeout(()=>{solving = false;}, delay*20);
 }
-
